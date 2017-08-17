@@ -1,0 +1,42 @@
+<div class="container login">
+	<div class="row top-margin">
+		<div class="col-lg-6 col-lg-offset-3">
+			<div class="row">
+				<h1 class="text-center">Sign Up</h1>
+			</div>
+			<form [formGroup]="signUpForm" novalidate (ngSubmit)="doSignUp()">
+				<div class="form-group input-top-padding">
+					<input type="text" class="form-control text-box" id="name" formControlName="name" placeholder="Full Name">
+					<small [hidden]="signUpForm.controls.name.valid || (signUpForm.controls.name.pristine && !submitted)">
+				        Full name is required
+				    </small>
+				</div>
+				<div class="form-group input-top-padding">
+					<input type="email" class="form-control text-box" id="email" formControlName="email" placeholder="Email">
+					<small [hidden]="signUpForm.controls.email.valid || (signUpForm.controls.email.pristine && !submitted)">
+				        Valid email is required
+				    </small>
+				</div>
+				<div class="form-group input-top-padding">
+					<input type="password" class="form-control text-box" id="pwd" formControlName="password" placeholder="Password">
+					<small [hidden]="signUpForm.controls.password.valid || (signUpForm.controls.password.pristine && !submitted)">
+				        Password is required: including 1 uppercase letter, 1 lowercase letter, and 1 number (minimum 8 characters)
+				    </small>
+				</div>
+				<div class="row input-top-padding" *ngIf="error.length > 0">
+					<div class="col-lg-12">
+						<span class="error-text">{{error}}</span>
+					</div>
+				</div>
+				<div class="input-top-padding">
+					<div class="col-lg-3 no-padding">
+						<button type="submit" [disabled]="!signUpForm.valid" class="btn btn-success btn-rect btn-block">SIGN UP</button>
+					</div>
+					<div class="col-lg-9 no-padding middle">
+						<span class="float-right">Already have an acount? <a routerLink="/signin" href="javascript:void();">Log in</a></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,87 @@
+<div class="container login">
+	<div class="row">
+		<div class="col-lg-10 col-lg-offset-1">
+			<h2>My Ideas</h2>
+			<a href="javascript:void(0);" (click)="addNewLine()"><img src="assets/images/btn_addanidea.png" class="button-add"></a>
+			<hr>
+		</div>
+		<div class="col-lg-10 col-lg-offset-1" *ngIf="ideas.length > 0">
+			<table class="table">
+				<thead>
+					<tr>
+						<th></th>
+						<th class="center-text regular-title">Impact</th>
+						<th class="center-text regular-title">Ease</th>
+						<th class="center-text regular-title">Confidence</th>
+						<th class="center-text">Avg.</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+				  	<tr *ngFor="let idea of ideas">
+				    	<td>
+				    		<ng-container *ngIf="idea.isNew">
+				    			<input type="text" class="form-control form-inline text-box" [ngModel]="idea.content" placeholder="Enter your idea..." required (input)="idea.content = $event.target.value">
+				    		</ng-container>
+							<ng-container *ngIf="!idea.isNew">
+					    		<li>{{idea.content}}</li>
+							</ng-container>
+				    	</td>
+				    	<td class="col-lg-1 center-text middle">
+				    		<ng-container *ngIf="idea.isNew">
+					    		<select class="form-control" [ngModel]="idea.impact" (change)="idea.impact = $event.target.value">
+									<option *ngFor="let number of [1,2,3,4,5,6,7,8,9,10]" value="{{number}}">{{number}}</option>
+							    </select>
+							</ng-container>
+							<ng-container *ngIf="!idea.isNew">
+					    		{{idea.impact}}
+							</ng-container>
+				    	</td>
+				    	<td class="col-lg-1 center-text middle">
+				    		<ng-container *ngIf="idea.isNew">
+					    		<select class="form-control" [ngModel]="idea.ease" (change)="idea.ease = $event.target.value">
+									<option *ngFor="let number of [1,2,3,4,5,6,7,8,9,10]" value="{{number}}">{{number}}</option>
+							    </select>
+							</ng-container>
+							<ng-container *ngIf="!idea.isNew">
+					    		{{idea.ease}}
+							</ng-container>
+				    	</td>
+				    	<td class="col-lg-1 center-text middle">
+				    		<ng-container *ngIf="idea.isNew">
+					    		<select class="form-control" [ngModel]="idea.confidence" (change)="idea.confidence = $event.target.value">
+									<option *ngFor="let number of [1,2,3,4,5,6,7,8,9,10]" value="{{number}}">{{number}}</option>
+							    </select>
+							</ng-container>
+							<ng-container *ngIf="!idea.isNew">
+					    		{{idea.confidence}}
+							</ng-container>
+				    	</td>
+				    	<td class="col-lg-1 center-text middle">{{idea.getAvg() | number : '1.0-2'}}</td>
+				    	<td class="col-lg-1 right-text middle">
+				    		<a href="javascript:void(0);" (click)="edit(idea)"><img src="assets/images/pen.png" class="action action-edit" *ngIf="!idea.isNew"></a>
+				    		<a href="javascript:void(0);" (click)="open(content)"><img src="assets/images/bin.png" class="action action-delete" *ngIf="!idea.isNew"></a>
+				    		<a href="javascript:void(0);" (click)="save(idea)"><img src="assets/images/Confirm_V.png" class="action action-edit" *ngIf="idea.isNew"></a>
+				    		<a href="javascript:void(0);" (click)="cancelEdit(idea)"><img src="assets/images/Cancel_X.png" class="action action-delete" *ngIf="idea.isNew"></a>
+				    	</td>
+				  	</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2 col-lg-offset-1">
+			<a href="javascript:void(0)" *ngIf="currentPage > 1" (click)="loadIdeas(currentPage-1)"><< Previous Page</a>
+		</div>
+		<div class="col-lg-6 center-text">
+			<span *ngIf="nextAvaliable || currentPage > 1">Page {{currentPage}}</span>
+		</div>
+		<div class="col-lg-2 right-text">
+			<a href="javascript:void(0)" *ngIf="nextAvaliable" (click)="loadIdeas(currentPage+1)">Next Page >></a>
+		</div>
+	</div>
+	<div class="row no-idea-box" *ngIf="ideas.length == 0">
+		<img src="assets/images/bulb.png">
+		<p class="no-ideas">Got Ideas?</p>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+.menu {
+	background-color: #00A843;
+	height: 100%;
+	width: 200px;
+}
+
+.menu-top {
+	text-align: center;
+}
+
+.menu-logo {
+	margin: auto;
+    display: block;
+    padding-top: 37px;
+}
+
+.menu-title {
+	color: #fff;
+	font-size: 16px;
+	padding-top: 13px;
+    display: block;
+}
+
+.user-box {
+	text-align: center;
+	padding-top: 13px;
+}
+
+hr {
+	width: 80%;
+}
+
+.avatar {
+	margin-top: 13px;
+	width: 64px;
+	border-radius: 32px;
+}
+
+.username {
+	color: #fff;
+	font-size: 18px;
+}
+
+.logout {
+	color: #ccc;
+}

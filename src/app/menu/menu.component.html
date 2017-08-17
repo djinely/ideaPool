@@ -1,0 +1,14 @@
+<nav class="menu">
+	<div class="menu-top">
+		<img src="assets/images/IdeaPool_icon.png" class="menu-logo">
+		<span class="menu-title">The Idea Pool</span>
+	</div>
+	<div class="user-box" *ngIf="user">
+		<hr>
+		<div>
+			<img [src]="user.avatar_url" class="avatar">
+			<p class="username">{{user.name}}</p>
+			<p><a class="logout" href="javascript:void(0);" (click)="logoutClicked()">Log out</a></p>
+		</div>
+	</div>
+</nav>

@@ -1,1 +1,61 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	font-weight: 300;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100%;
+}
+
+a {
+	color: #00A843;
+	font-weight: 400;
+}
+
+a:hover {
+	color: #00A843;
+}
+
+a:active {
+	color: #00A843;
+}
+
+a:visited {
+	color: #00A843;
+}
+
+.error-text {
+	color: red;
+}
+
+.container {
+	position: absolute;
+    top: 0px;
+    width: 100%;
+}
+
+.text-box {
+	border-radius: 0px !important;
+    border: 0px !important;
+    border-bottom: 1px solid #ccc !important;
+    box-shadow: 0px 0px 0px !important;
+    padding: 0px !important;
+}
+
+.btn-rect {
+	border-radius: 0px;
+}
+
+.input-top-padding {
+	padding-top: 25px;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.float-right {
+	float: right;
+}
