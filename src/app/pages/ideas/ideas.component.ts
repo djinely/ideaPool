@@ -27,16 +27,22 @@ export class IdeasComponent implements OnInit {
 	loadIdeas(page) {
 		this.currentPage = page;
 
-		this._ideasService.getIdeas(page).subscribe(
-        	data => {
-        		this.ideas = data;
+		let getIdeas = () => {
+			this._ideasService.getIdeas(page).subscribe(
+	        	data => {
+	        		this.ideas = data;
 
-        		// Check next page availability
-        		this._ideasService.getIdeas(page+1).subscribe( data => { this.nextAvaliable = data.length > 0; });
-        	},
-        	err => {
-        	}
-        );
+	        		// Check next page availability
+	        		this._ideasService.getIdeas(page+1).subscribe( data => { this.nextAvaliable = data.length > 0; });
+	        	}
+	        );
+		}
+
+		if (!this._authService.isTokenValid()) {
+			this._authService.refreshToken(getIdeas);
+		} else {
+			getIdeas();
+		}
 	}
 
 	addNewLine() {
@@ -54,19 +60,38 @@ export class IdeasComponent implements OnInit {
 	}
 
 	save(idea) {
-		this._ideasService.save(idea).subscribe(data => {
-			this.loadIdeas(this.currentPage);
-		});
+		let saveIdea = () => {
+			this._ideasService.save(idea).subscribe(data => {
+				this.loadIdeas(this.currentPage);
+			});
+		}
 
+		if (!this._authService.isTokenValid()) {
+			this._authService.refreshToken(saveIdea);
+		} else {
+			saveIdea();
+		}
+		
 		if (idea.id == '') {
 			this.isAdding = false;
 		}
 	}
 
 	delete(idea) {
-		this._ideasService.delete(idea).subscribe(() => {
-			this.loadIdeas(this.currentPage);
-		});
+		let confirmDialog = confirm("This idea will be permanently deleted.");
+		if (confirmDialog == true) {
+			let deleteIdea = () => {
+				this._ideasService.delete(idea).subscribe(() => {
+					this.loadIdeas(this.currentPage);
+				});
+			}
+
+			if (!this._authService.isTokenValid()) {
+				this._authService.refreshToken(deleteIdea);
+			} else {
+				deleteIdea();
+			}
+		}
 	}
 
 	cancelEdit(idea) {

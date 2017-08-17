@@ -29,8 +29,23 @@ export class AuthService {
     	});
     }
 
-    refreshToken() {
-    	return this.http.post(this.API_ENDPOINT + '/access-tokens/refresh', {refresh_token: localStorage.getItem('currentRefreshToken')}, this.jwt()).map((res:Response) => res.json());
+    refreshToken(callback) {
+    	return this.http.post(this.API_ENDPOINT + '/access-tokens/refresh', {refresh_token: localStorage.getItem('currentRefreshToken')}, this.jwt()).map((res:Response) => res.json()).subscribe(data => {
+            this.token = data.jwt;
+            this.tokenExpiry = new Date();
+            localStorage.setItem('currentToken', this.token);
+            localStorage.setItem('currentTokenExpiry', JSON.stringify(this.tokenExpiry));
+            callback();
+        });
+    }
+
+    isTokenValid() : boolean {
+        let startTime = new Date(JSON.parse(localStorage.getItem('currentTokenExpiry'))); 
+        let endTime = new Date();
+        let difference = endTime.getTime() - startTime.getTime();
+        let resultInMinutes = Math.round(difference / 60000);
+
+        return resultInMinutes < 10;
     }
 
 	private jwt() {

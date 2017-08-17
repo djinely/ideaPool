@@ -60,7 +60,7 @@
 				    	<td class="col-lg-1 center-text middle">{{idea.getAvg() | number : '1.0-2'}}</td>
 				    	<td class="col-lg-1 right-text middle">
 				    		<a href="javascript:void(0);" (click)="edit(idea)"><img src="assets/images/pen.png" class="action action-edit" *ngIf="!idea.isNew"></a>
-				    		<a href="javascript:void(0);" (click)="open(content)"><img src="assets/images/bin.png" class="action action-delete" *ngIf="!idea.isNew"></a>
+				    		<a href="javascript:void(0);" (click)="delete(idea)"><img src="assets/images/bin.png" class="action action-delete" *ngIf="!idea.isNew"></a>
 				    		<a href="javascript:void(0);" (click)="save(idea)"><img src="assets/images/Confirm_V.png" class="action action-edit" *ngIf="idea.isNew"></a>
 				    		<a href="javascript:void(0);" (click)="cancelEdit(idea)"><img src="assets/images/Cancel_X.png" class="action action-delete" *ngIf="idea.isNew"></a>
 				    	</td>
